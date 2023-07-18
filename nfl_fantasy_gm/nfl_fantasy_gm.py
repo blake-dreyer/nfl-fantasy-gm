@@ -2,9 +2,19 @@
 from rxconfig import config
 
 import reflex as rx
+import pandas as pd
+import numpy as np
+import nfl_data_py as nfl
+
 
 docs_url = "https://pynecone.io/docs/getting-started/introduction"
 filename = f"{config.app_name}/{config.app_name}.py"
+years = list(range(2012,2022))
+weekly_data = nfl.import_weekly_data(years)
+test = weekly_data.at[4,'fantasy_points_ppr']
+test = str(test)
+
+
 
 
 class State(rx.State):
@@ -18,7 +28,7 @@ def index() -> rx.Component:
         rx.color_mode_button(rx.color_mode_icon(), float="right"),
         rx.vstack(
             rx.heading("Welcome to Reflex!", font_size="2em"),
-            rx.box("Get started by editing ", rx.code(filename, font_size="1em")),
+            rx.box(test),
             rx.link(
                 "Check out our docs!",
                 href=docs_url,
